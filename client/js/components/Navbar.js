@@ -31,7 +31,7 @@ var Navbar = module.exports = {
       m(".container", [
         m(".navbar-header",
           m('button.navbar-toggle', {onclick: ctrl.toggle}, m('.glyphicon.glyphicon-chevron-' + ctrl.iconDirection())),
-          m("a.navbar-brand[href='/']", {config: m.route}, "Your sweet app")
+          m("a.navbar-brand[href='/']", {config: m.route}, "Tu app")
         ),
         m(".navbar-collapse." + ctrl.iconDirection(), 
           m("ul.nav.navbar-nav.navbar-right", ctrl.links())

@@ -41,6 +41,7 @@
     "mongoose-type-relation": "^1.0.0"
   },
   "devDependencies": {
+    "gulp-msx": "^0.3.0",
     "mockgoose": "^1.10.7"
   }
 }
