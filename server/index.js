@@ -48,6 +48,9 @@ app.get('/api/tasty', auth.requireToken, function(req, res){
   res.send(req.user);
 });
 
+app.get('/nombre', function(req, res){
+  res.send(req.body.nombre);
+});
 // TODO: implement server-side parsing for initial page-load
 app.get('/*', function(req, res){
   res.sendFile(path.join(pubDir, 'index.html'));
