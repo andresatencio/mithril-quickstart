@@ -6,25 +6,31 @@ var Prueba = module.exports = {
     m.redraw.strategy("diff");
     var ctrl = this;
     var i = 0;
-    m.startComputation();
+    //m.startComputation();
     ctrl.contador = 0;
     ctrl.navbar = new Navbar.controller();
 
-    setInterval(function () {
-      ctrl.contador = i;
-      i++;
-      console.log(i)
-      m.endComputation();
-    }, 1000)
+    // setInterval(function () {
+    //   ctrl.contador = i;
+    //   i++;
+    //   console.log(i)
+    //   m.endComputation();
+    // }, 1000)
+
     ctrl.saluda = 'Hola, soy yo';
+
+    ctrl.nombre = m.prop("");
 
     ctrl.enviar = function (e) {
       e.preventDefault();
-      return m.request({
+      m.request({
         method: 'POST',
         url: '/nombre',
-        data: {email:e.target.nombre.value}
-      });
+        data: {nombre:ctrl.nombre},
+        unwrapSuccess: function(res) {
+         console.log(res)
+        }
+      })
     }
   },
   
@@ -39,11 +45,13 @@ var Prueba = module.exports = {
             <p>{ctrl.saluda}</p>
               <form>
               <label for="nombre">Nombre</label>
-              <input type="text" name="nombre" placeholders="Escribi tu nombre"></input>
+              <input type="text" onchange={m.withAttr("value", ctrl.nombre)} value={ctrl.nombre()} placeholders="Escribi tu nombre"></input>
               <button onclick={ctrl.enviar.bind(ctrl)}>Enviar</button>
+              <span>{ctrl.nombre()}</span>
               </form>
             </div>
           </div>
+
     
   }
 }

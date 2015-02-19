@@ -2,6 +2,7 @@ var path = require('path'),
   fs = require('fs'),
   dotenv = require('dotenv'),
   express = require('express'),
+  bodyParser = require('body-parser'),
   app = express(),
   pubDir = path.join(__dirname, '..', 'client'),
   envFile = path.join(__dirname, '..', '.env'),
@@ -27,6 +28,9 @@ mongoose.connect(mongo_url);
 // use models after potential mockgoose
 var auth = require('./auth.js');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // serve up CSS from LESS. this is efficiently cached.
 app.use(lessMiddleware(pubDir, {
   parser:{
@@ -48,8 +52,9 @@ app.get('/api/tasty', auth.requireToken, function(req, res){
   res.send(req.user);
 });
 
-app.get('/nombre', function(req, res){
-  res.send(req.body.nombre);
+app.post('/nombre', function(req, res){
+  console.log(req.body.nombre)
+  return res.send({nombre:req.body.nombre});
 });
 // TODO: implement server-side parsing for initial page-load
 app.get('/*', function(req, res){
