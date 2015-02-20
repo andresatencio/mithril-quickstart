@@ -23,12 +23,12 @@ var Prueba = module.exports = {
 
     ctrl.enviar = function (e) {
       e.preventDefault();
-      return m.request({
+      m.request({
         method: 'POST',
         url: '/nombre',
         data: {nombre:ctrl.nombre},
         unwrapSuccess: function(res) {
-          return console.log(res)
+         console.log(res)
         }
       })
     }
